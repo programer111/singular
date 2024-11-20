@@ -41,10 +41,10 @@ classDiagram
         + view_chickens()
         + close_database()
     }
-```
 
 
     Animal <|-- Cow
     Animal <|-- Chicken
     UserInterface --> Database
     Database --> Animal
+```
