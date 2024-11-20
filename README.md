@@ -43,8 +43,9 @@ classDiagram
     }
 
 
-    Animal <|-- Cow
-    Animal <|-- Chicken
+    Database --> Cow
+    Database --> Chicken
+    Cow <|-- Animal
+    Chicken <|-- Animal
     UserInterface --> Database
-    Database --> Animal
 ```
