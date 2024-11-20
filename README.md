@@ -1,39 +1,50 @@
-uml = Digraph("UML Diagram for Animal Management System")
+```mermaid
+classDiagram
+    class Animal {
+        + id: str
+        + name: str
+        + much: str
+        + dep_numb: str
+        + __init__(id, name, much, dep_numb)
+    }
 
-# Define nodes for each class with attributes and methods
-uml.node("Animal", '''<<class>> Animal
-------------------------
-- id: str
-- name: str
-- much: str
-- dep_numb: str''')
+    class Cow {
+        + a_name1: str
+        + __init__(id, name, a_name1, much, dep_numb)
+        + from_input() : Cow
+    }
 
-uml.node("Cow", '''<<class>> Cow
-------------------------
-- a_name1: str
-------------------------
-+ from_input(): classmethod''')
+    class Chicken {
+        + a_name: str
+        + __init__(id, name, a_name, much, dep_numb)
+        + from_input() : Chicken
+    }
 
-uml.node("Chicken", '''<<class>> Chicken
-------------------------
-- a_name: str
-------------------------
-+ from_input(): classmethod''')
+    class Database {
+        + conn: sqlite3.Connection
+        + cursor: sqlite3.Cursor
+        + add_cow(cow: Cow)
+        + add_chicken(chicken: Chicken)
+        + remove_cow(id: str)
+        + remove_chicken(id: str)
+        + get_all_cows() : DataFrame
+        + get_all_chickens() : DataFrame
+        + close()
+    }
 
-uml.node("Database", '''<<class>> Database
-------------------------
-- conn: sqlite3.Connection
-------------------------
-+ methods for DB operations''')
+    class UserInterface {
+        + add_cow()
+        + add_chicken()
+        + remove_cows()
+        + remove_chickens()
+        + view_cows()
+        + view_chickens()
+        + close_database()
+    }
+```
 
-# Add inheritance relationships
-uml.edge("Animal", "Cow", arrowhead="empty")
-uml.edge("Animal", "Chicken", arrowhead="empty")
 
-# Show association between Database and other classes
-uml.edge("Cow", "Database", label="uses", style="dashed")
-uml.edge("Chicken", "Database", label="uses", style="dashed")
-
-# Render the UML diagram
-uml.render("/mnt/data/animal_management_system_uml", format="png", cleanup=True)
-"/mnt/data/animal_management_system_uml.png"
+    Animal <|-- Cow
+    Animal <|-- Chicken
+    UserInterface --> Database
+    Database --> Animal
